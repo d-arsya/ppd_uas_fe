@@ -1,65 +1,195 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import Navigation from "@/components/Navigation";
+
+export default function Dashboard() {
+  const { user, isAuthenticated } = useAuth();
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div>
+      <Navigation />
+
+      <div className="container">
+        <div className="card">
+          <h1 className="card-title">
+            Welcome{isAuthenticated && user ? `, ${user.fullname}` : ""} 👋
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p
+            style={{ color: "#6b7280", marginBottom: "30px", fontSize: "18px" }}
+          >
+            Analyze financial news headlines and predict sentiment with AI
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "20px",
+              marginTop: "40px",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <Link href="/predict" style={{ textDecoration: "none" }}>
+              <div
+                style={{
+                  background:
+                    "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  padding: "30px",
+                  borderRadius: "12px",
+                  color: "white",
+                  cursor: "pointer",
+                  transition: "transform 0.3s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "translateY(-5px)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "translateY(0)")
+                }
+              >
+                <div style={{ fontSize: "48px", marginBottom: "15px" }}>🔮</div>
+                <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>
+                  Predict Sentiment
+                </h3>
+                <p style={{ opacity: 0.9 }}>
+                  Analyze text and get sentiment predictions
+                </p>
+              </div>
+            </Link>
+
+            <Link href="/news" style={{ textDecoration: "none" }}>
+              <div
+                style={{
+                  background:
+                    "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+                  padding: "30px",
+                  borderRadius: "12px",
+                  color: "white",
+                  cursor: "pointer",
+                  transition: "transform 0.3s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "translateY(-5px)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "translateY(0)")
+                }
+              >
+                <div style={{ fontSize: "48px", marginBottom: "15px" }}>📰</div>
+                <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>
+                  Latest News
+                </h3>
+                <p style={{ opacity: 0.9 }}>
+                  Browse analyzed financial news headlines
+                </p>
+              </div>
+            </Link>
+
+            <Link href="/history" style={{ textDecoration: "none" }}>
+              <div
+                style={{
+                  background:
+                    "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+                  padding: "30px",
+                  borderRadius: "12px",
+                  color: "white",
+                  cursor: "pointer",
+                  transition: "transform 0.3s",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "translateY(-5px)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "translateY(0)")
+                }
+              >
+                <div style={{ fontSize: "48px", marginBottom: "15px" }}>📜</div>
+                <h3 style={{ fontSize: "20px", marginBottom: "10px" }}>
+                  Your History
+                </h3>
+                <p style={{ opacity: 0.9 }}>
+                  View your past sentiment predictions
+                </p>
+              </div>
+            </Link>
+          </div>
         </div>
-      </main>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "20px",
+            marginTop: "20px",
+          }}
+        >
+          <div className="card">
+            <h3
+              style={{
+                fontSize: "18px",
+                marginBottom: "15px",
+                color: "#667eea",
+              }}
+            >
+              ✨ Features
+            </h3>
+            <ul
+              style={{ listStyle: "none", color: "#6b7280", lineHeight: "2" }}
+            >
+              <li>• Real-time sentiment analysis</li>
+              <li>• Financial news monitoring</li>
+              <li>• Prediction history tracking</li>
+              <li>• AI-powered insights</li>
+            </ul>
+          </div>
+
+          <div className="card">
+            <h3
+              style={{
+                fontSize: "18px",
+                marginBottom: "15px",
+                color: "#f5576c",
+              }}
+            >
+              🎯 How It Works
+            </h3>
+            <ul
+              style={{ listStyle: "none", color: "#6b7280", lineHeight: "2" }}
+            >
+              <li>1. Enter your text</li>
+              <li>2. Click analyze</li>
+              <li>3. Get instant results</li>
+              <li>4. Review your history</li>
+            </ul>
+          </div>
+
+          <div className="card">
+            <h3
+              style={{
+                fontSize: "18px",
+                marginBottom: "15px",
+                color: "#00f2fe",
+              }}
+            >
+              📊 Sentiment Types
+            </h3>
+            <div
+              style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+            >
+              <span className="sentiment-badge sentiment-positive">
+                😊 Positive
+              </span>
+              <span className="sentiment-badge sentiment-negative">
+                😔 Negative
+              </span>
+              <span className="sentiment-badge sentiment-neutral">
+                😐 Neutral
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
